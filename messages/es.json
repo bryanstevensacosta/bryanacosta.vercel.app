@@ -80,5 +80,22 @@
     "copyright": "© 2024 DevPortfolio. Built with Next.js and Tailwind.",
     "privacy": "Privacy",
     "terms": "Terms"
+  },
+  "skills": {
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Base de Datos",
+      "devops": "DevOps",
+      "ai": "IA"
+    },
+    "items": {
+      "react": "React",
+      "typescript": "TypeScript",
+      "python": "Python",
+      "postgresql": "PostgreSQL",
+      "aws": "AWS",
+      "openai": "OpenAI"
+    }
   }
 }
