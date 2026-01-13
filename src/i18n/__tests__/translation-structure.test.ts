@@ -49,6 +49,9 @@ describe('Translation File Structure', () => {
     'footer',
     'stats',
     'floatingCards',
+    'skills',
+    'metadata',
+    'interpolation',
   ]
 
   it('should have all required namespaces in Spanish translations', () => {

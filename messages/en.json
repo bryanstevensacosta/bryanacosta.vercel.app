@@ -81,6 +81,14 @@
     "privacy": "Privacy",
     "terms": "Terms"
   },
+  "interpolation": {
+    "welcome": "Welcome, {name}!",
+    "projectCount": "You have completed {count} {count, plural, one {project} other {projects}}",
+    "greeting": "Hello {name}, you have {count} {count, plural, one {new message} other {new messages}}",
+    "experience": "With {years} years of experience in {technology}",
+    "achievement": "{name} has achieved {achievement} in {year}",
+    "stats": "Over {count} satisfied clients in {countries} countries"
+  },
   "skills": {
     "categories": {
       "frontend": "Frontend",

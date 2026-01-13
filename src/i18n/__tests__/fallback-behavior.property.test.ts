@@ -125,6 +125,7 @@ describe('Translation Fallback Behavior', () => {
         'footer',
         'skills',
         'metadata',
+        'interpolation',
       ]
 
       fc.assert(
@@ -190,6 +191,7 @@ describe('Translation Fallback Behavior', () => {
             'footer',
             'skills',
             'metadata',
+            'interpolation',
           ]
           expect(validNamespaces).toContain(parts[0])
 
