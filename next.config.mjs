@@ -10,6 +10,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    turbo: {
+      root: process.cwd(),
+    },
+  },
 }
 
 export default withNextIntl(nextConfig)
