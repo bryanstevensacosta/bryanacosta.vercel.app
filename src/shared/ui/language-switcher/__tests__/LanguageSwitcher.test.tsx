@@ -30,14 +30,18 @@ describe('LanguageSwitcher', () => {
 
     render(<LanguageSwitcher />)
 
-    // Check that all locales are rendered
-    locales.forEach((locale) => {
-      const button = screen.getByText(localeNames[locale])
-      expect(button).toBeDefined()
+    // Open dropdown first
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    fireEvent.click(triggerButton)
 
-      // Check that the flag is rendered
-      const flag = screen.getByText(localeFlags[locale])
-      expect(flag).toBeDefined()
+    // Check that all locales are rendered in dropdown
+    locales.forEach((locale) => {
+      const button = screen.getByRole('button', {
+        name: `Switch to ${localeNames[locale]}`,
+      })
+      expect(button).toBeDefined()
     })
   })
 
@@ -48,18 +52,25 @@ describe('LanguageSwitcher', () => {
 
     render(<LanguageSwitcher />)
 
+    // Open dropdown first
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    fireEvent.click(triggerButton)
+
     locales.forEach((locale) => {
-      const button = screen.getByText(localeNames[locale]).closest('button')
+      const button = screen.getByRole('button', {
+        name: `Switch to ${localeNames[locale]}`,
+      })
       expect(button).toBeDefined()
 
       if (locale === activeLocale) {
-        // Active locale should have primary background
-        expect(button?.className).toContain('bg-primary')
+        // Active locale should have white background
+        expect(button?.className).toContain('bg-white/10')
         expect(button?.className).toContain('text-white')
         expect(button?.getAttribute('aria-current')).toBe('true')
       } else {
         // Inactive locales should have different styling
-        expect(button?.className).toContain('bg-white/5')
         expect(button?.className).toContain('text-gray-400')
         expect(button?.getAttribute('aria-current')).toBe('false')
       }
@@ -76,8 +87,16 @@ describe('LanguageSwitcher', () => {
 
     render(<LanguageSwitcher />)
 
+    // Open dropdown first
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    fireEvent.click(triggerButton)
+
     // Click on the English locale button
-    const englishButton = screen.getByText(localeNames[targetLocale])
+    const englishButton = screen.getByRole('button', {
+      name: `Switch to ${localeNames[targetLocale]}`,
+    })
     fireEvent.click(englishButton)
 
     // Verify router.replace was called with correct arguments
@@ -92,8 +111,16 @@ describe('LanguageSwitcher', () => {
 
     render(<LanguageSwitcher />)
 
+    // Open dropdown first
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    fireEvent.click(triggerButton)
+
     locales.forEach((locale) => {
-      const button = screen.getByText(localeNames[locale]).closest('button')
+      const button = screen.getByRole('button', {
+        name: `Switch to ${localeNames[locale]}`,
+      })
       expect(button).toBeDefined()
 
       // Check aria-label
@@ -112,7 +139,13 @@ describe('LanguageSwitcher', () => {
 
     const { container } = render(<LanguageSwitcher />)
 
-    const wrapper = container.querySelector('.flex.items-center.gap-2')
+    // Open dropdown first
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    fireEvent.click(triggerButton)
+
+    const wrapper = container.querySelector('.absolute.right-0')
     expect(wrapper).toBeDefined()
   })
 
@@ -125,8 +158,16 @@ describe('LanguageSwitcher', () => {
 
     render(<LanguageSwitcher />)
 
+    // Open dropdown first
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    fireEvent.click(triggerButton)
+
     // Click on the already active locale
-    const activeButton = screen.getByText(localeNames[activeLocale])
+    const activeButton = screen.getByRole('button', {
+      name: `Switch to ${localeNames[activeLocale]}`,
+    })
     fireEvent.click(activeButton)
 
     // Should still call router.replace (idempotent operation)

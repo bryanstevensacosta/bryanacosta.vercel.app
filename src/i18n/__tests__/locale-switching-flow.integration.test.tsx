@@ -38,12 +38,20 @@ describe('Integration: Full Locale Switching Flow', () => {
     vi.clearAllMocks()
   })
 
-  it('should render language switcher with Spanish as default locale', () => {
+  it('should render language switcher with Spanish as default locale', async () => {
+    const user = userEvent.setup()
+
     render(
       <NextIntlClientProvider locale="es" messages={esMessages}>
         <LanguageSwitcher />
       </NextIntlClientProvider>
     )
+
+    // Open dropdown
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    await user.click(triggerButton)
 
     // Verify Spanish button is active
     const spanishButton = screen.getByRole('button', {
@@ -61,12 +69,20 @@ describe('Integration: Full Locale Switching Flow', () => {
     expect(englishButton).toHaveAttribute('aria-current', 'false')
   })
 
-  it('should render language switcher with English locale', () => {
+  it('should render language switcher with English locale', async () => {
+    const user = userEvent.setup()
+
     render(
       <NextIntlClientProvider locale="en" messages={enMessages}>
         <LanguageSwitcher />
       </NextIntlClientProvider>
     )
+
+    // Open dropdown
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    await user.click(triggerButton)
 
     const spanishButton = screen.getByRole('button', {
       name: /switch to español/i,
@@ -88,6 +104,12 @@ describe('Integration: Full Locale Switching Flow', () => {
         <LanguageSwitcher />
       </NextIntlClientProvider>
     )
+
+    // Open dropdown
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    await user.click(triggerButton)
 
     const englishButton = screen.getByRole('button', {
       name: /switch to english/i,
@@ -111,6 +133,12 @@ describe('Integration: Full Locale Switching Flow', () => {
       </NextIntlClientProvider>
     )
 
+    // Open dropdown
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    await user.click(triggerButton)
+
     const spanishButton = screen.getByRole('button', {
       name: /switch to español/i,
     })
@@ -133,6 +161,10 @@ describe('Integration: Full Locale Switching Flow', () => {
       </NextIntlClientProvider>
     )
 
+    // Open dropdown
+    let triggerButton = screen.getByRole('button', { name: /change language/i })
+    await user.click(triggerButton)
+
     // Click English button
     const englishButton = screen.getByRole('button', {
       name: /switch to english/i,
@@ -145,6 +177,10 @@ describe('Integration: Full Locale Switching Flow', () => {
         <LanguageSwitcher />
       </NextIntlClientProvider>
     )
+
+    // Open dropdown again
+    triggerButton = screen.getByRole('button', { name: /change language/i })
+    await user.click(triggerButton)
 
     // Verify English is now active
     const spanishButton = screen.getByRole('button', {
@@ -167,6 +203,10 @@ describe('Integration: Full Locale Switching Flow', () => {
       </NextIntlClientProvider>
     )
 
+    // Open dropdown
+    let triggerButton = screen.getByRole('button', { name: /change language/i })
+    await user.click(triggerButton)
+
     // Switch to English
     const englishButton = screen.getByRole('button', {
       name: /switch to english/i,
@@ -181,6 +221,10 @@ describe('Integration: Full Locale Switching Flow', () => {
         <LanguageSwitcher />
       </NextIntlClientProvider>
     )
+
+    // Open dropdown again
+    triggerButton = screen.getByRole('button', { name: /change language/i })
+    await user.click(triggerButton)
 
     // Switch back to Spanish
     const spanishButton = screen.getByRole('button', {
@@ -202,6 +246,12 @@ describe('Integration: Full Locale Switching Flow', () => {
         <LanguageSwitcher />
       </NextIntlClientProvider>
     )
+
+    // Open dropdown
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    await user.click(triggerButton)
 
     const englishButton = screen.getByRole('button', {
       name: /switch to english/i,
@@ -225,19 +275,28 @@ describe('Integration: Full Locale Switching Flow', () => {
       </NextIntlClientProvider>
     )
 
+    // Tab to trigger button
+    await user.tab()
+    const triggerButton = screen.getByRole('button', {
+      name: /change language/i,
+    })
+    expect(triggerButton).toHaveFocus()
+
+    // Press Enter to open dropdown
+    await user.keyboard('{Enter}')
+
+    // Tab to Spanish button
+    await user.tab()
     const spanishButton = screen.getByRole('button', {
       name: /switch to español/i,
     })
+    expect(spanishButton).toHaveFocus()
+
+    // Tab to English button
+    await user.tab()
     const englishButton = screen.getByRole('button', {
       name: /switch to english/i,
     })
-
-    // Tab to first button
-    await user.tab()
-    expect(spanishButton).toHaveFocus()
-
-    // Tab to second button
-    await user.tab()
     expect(englishButton).toHaveFocus()
 
     // Press Enter to activate

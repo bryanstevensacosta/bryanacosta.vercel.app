@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { ViewTransitions } from 'next-view-transitions'
 import {
   Noto_Sans,
   Space_Grotesk,
@@ -112,15 +113,17 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className="dark">
-      <body
-        className={`${notoSans.variable} ${spaceGrotesk.variable} ${geistMono.variable} ${figtree.variable} ${cookie.variable} font-sans antialiased overflow-x-hidden`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-        <Analytics />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang={locale} className="dark">
+        <body
+          className={`${notoSans.variable} ${spaceGrotesk.variable} ${geistMono.variable} ${figtree.variable} ${cookie.variable} font-sans antialiased overflow-x-hidden`}
+        >
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+          <Analytics />
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

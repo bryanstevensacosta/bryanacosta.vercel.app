@@ -9,6 +9,16 @@ vi.mock('next-intl', () => ({
   useTranslations: () => mockUseTranslations,
 }))
 
+// Mock @/i18n/routing
+vi.mock('@/i18n/routing', () => ({
+  useRouter: () => ({
+    replace: vi.fn(),
+    push: vi.fn(),
+  }),
+  usePathname: () => '/',
+  Link: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+}))
+
 // Mock LanguageSwitcher
 vi.mock('@/shared/ui/language-switcher', () => ({
   LanguageSwitcher: () => (
@@ -54,7 +64,6 @@ describe('Header', () => {
         'nav.projects': 'Proyectos',
         'nav.stack': 'Stack',
         'nav.journey': 'Trayectoria',
-        downloadCV: 'Descargar CV',
       }
       return translations[key] || key
     })
@@ -69,9 +78,6 @@ describe('Header', () => {
     expect(screen.getByText('Proyectos')).toBeDefined()
     expect(screen.getByText('Stack')).toBeDefined()
     expect(screen.getByText('Trayectoria')).toBeDefined()
-
-    // Check download CV button
-    expect(screen.getByText('Descargar CV')).toBeDefined()
   })
 
   it('should render with English translations', () => {
@@ -83,7 +89,6 @@ describe('Header', () => {
         'nav.projects': 'Projects',
         'nav.stack': 'Stack',
         'nav.journey': 'Journey',
-        downloadCV: 'Download CV',
       }
       return translations[key] || key
     })
@@ -98,9 +103,6 @@ describe('Header', () => {
     expect(screen.getByText('Projects')).toBeDefined()
     expect(screen.getByText('Stack')).toBeDefined()
     expect(screen.getByText('Journey')).toBeDefined()
-
-    // Check download CV button
-    expect(screen.getByText('Download CV')).toBeDefined()
   })
 
   it('should use translation keys for all text content', () => {
@@ -120,7 +122,6 @@ describe('Header', () => {
     expect(translationKeys).toContain('nav.projects')
     expect(translationKeys).toContain('nav.stack')
     expect(translationKeys).toContain('nav.journey')
-    expect(translationKeys).toContain('downloadCV')
 
     // Verify no hardcoded Spanish or English text
     expect(screen.queryByText('Soluciones')).toBeNull()

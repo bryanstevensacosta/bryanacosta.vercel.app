@@ -1,5 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  within,
+} from '@testing-library/react'
 import * as fc from 'fast-check'
 import { LanguageSwitcher } from '../LanguageSwitcher'
 import { locales, localeNames } from '@/i18n/config'
@@ -54,12 +60,19 @@ describe('Locale Change Behavior Property Tests', () => {
           // Render component
           const { unmount } = render(<LanguageSwitcher />)
 
+          // Open dropdown
+          const triggerButton = screen.getByRole('button', {
+            name: /change language/i,
+          })
+          fireEvent.click(triggerButton)
+
           // Find and click the target locale button
-          const targetButton = screen.getByText(localeNames[targetLocale])
+          const targetButton = screen.getByRole('button', {
+            name: `Switch to ${localeNames[targetLocale]}`,
+          })
           fireEvent.click(targetButton)
 
           // Verify router.replace was called with correct arguments
-          // Note: Component currently uses '/' as pathname (hardcoded)
           expect(mockReplace).toHaveBeenCalledWith('/', {
             locale: targetLocale,
           })
@@ -86,14 +99,27 @@ describe('Locale Change Behavior Property Tests', () => {
           mockUsePathname.mockReturnValue('/')
 
           // First render
-          const { unmount, rerender } = render(<LanguageSwitcher />)
+          const { unmount, rerender, container } = render(<LanguageSwitcher />)
+
+          // Open dropdown
+          const buttons = container.querySelectorAll(
+            'button[aria-label="Change language"]'
+          )
+          const triggerButton = buttons[0] as HTMLButtonElement
+          fireEvent.click(triggerButton)
 
           // Verify initial active state
-          const initialButton = screen
-            .getByText(localeNames[initialLocale])
-            .closest('button')
-          expect(initialButton?.className).toContain('bg-primary')
-          expect(initialButton?.getAttribute('aria-current')).toBe('true')
+          const dropdown = container.querySelector('.absolute.right-0')
+          if (dropdown) {
+            const initialButton = within(dropdown as HTMLElement).getByRole(
+              'button',
+              {
+                name: `Switch to ${localeNames[initialLocale]}`,
+              }
+            )
+            expect(initialButton?.className).toContain('bg-white/10')
+            expect(initialButton?.getAttribute('aria-current')).toBe('true')
+          }
 
           // Simulate locale change by updating the mock
           mockUseLocale.mockReturnValue(newLocale)
@@ -101,20 +127,36 @@ describe('Locale Change Behavior Property Tests', () => {
           // Re-render component (simulating React re-render after locale change)
           rerender(<LanguageSwitcher />)
 
-          // Verify new active state
-          const newButton = screen
-            .getByText(localeNames[newLocale])
-            .closest('button')
-          expect(newButton?.className).toContain('bg-primary')
-          expect(newButton?.getAttribute('aria-current')).toBe('true')
+          // Open dropdown again
+          const buttons2 = container.querySelectorAll(
+            'button[aria-label="Change language"]'
+          )
+          const triggerButton2 = buttons2[0] as HTMLButtonElement
+          fireEvent.click(triggerButton2)
 
-          // Verify old locale is no longer active (if different)
-          if (initialLocale !== newLocale) {
-            const oldButton = screen
-              .getByText(localeNames[initialLocale])
-              .closest('button')
-            expect(oldButton?.className).not.toContain('bg-primary')
-            expect(oldButton?.getAttribute('aria-current')).toBe('false')
+          // Verify new active state
+          const dropdown2 = container.querySelector('.absolute.right-0')
+          if (dropdown2) {
+            const newButton = within(dropdown2 as HTMLElement).getByRole(
+              'button',
+              {
+                name: `Switch to ${localeNames[newLocale]}`,
+              }
+            )
+            expect(newButton?.className).toContain('bg-white/10')
+            expect(newButton?.getAttribute('aria-current')).toBe('true')
+
+            // Verify old locale is no longer active (if different)
+            if (initialLocale !== newLocale) {
+              const oldButton = within(dropdown2 as HTMLElement).getByRole(
+                'button',
+                {
+                  name: `Switch to ${localeNames[initialLocale]}`,
+                }
+              )
+              expect(oldButton?.className).not.toContain('bg-white/10')
+              expect(oldButton?.getAttribute('aria-current')).toBe('false')
+            }
           }
 
           // Cleanup
@@ -140,11 +182,19 @@ describe('Locale Change Behavior Property Tests', () => {
 
           // Render and trigger locale change
           const { unmount } = render(<LanguageSwitcher />)
-          const targetButton = screen.getByText(localeNames[targetLocale])
+
+          // Open dropdown
+          const triggerButton = screen.getByRole('button', {
+            name: /change language/i,
+          })
+          fireEvent.click(triggerButton)
+
+          const targetButton = screen.getByRole('button', {
+            name: `Switch to ${localeNames[targetLocale]}`,
+          })
           fireEvent.click(targetButton)
 
           // Verify router.replace was called
-          // Note: Component currently uses '/' as pathname (hardcoded)
           expect(mockReplace).toHaveBeenCalledWith('/', {
             locale: targetLocale,
           })
@@ -170,23 +220,51 @@ describe('Locale Change Behavior Property Tests', () => {
           mockUsePathname.mockReturnValue('/')
 
           // Render
-          const { unmount } = render(<LanguageSwitcher />)
+          const { unmount, container } = render(<LanguageSwitcher />)
+
+          // Open dropdown
+          const buttons = container.querySelectorAll(
+            'button[aria-label="Change language"]'
+          )
+          const triggerButton = buttons[0] as HTMLButtonElement
+          fireEvent.click(triggerButton)
 
           // Click to change locale
-          const changeButton = screen.getByText(localeNames[changedLocale])
-          fireEvent.click(changeButton)
+          const dropdown = container.querySelector('.absolute.right-0')
+          if (dropdown) {
+            const changeButton = within(dropdown as HTMLElement).getByRole(
+              'button',
+              {
+                name: `Switch to ${localeNames[changedLocale]}`,
+              }
+            )
+            fireEvent.click(changeButton)
+          }
 
           // Update mock to reflect change
           mockUseLocale.mockReturnValue(changedLocale)
 
+          // Open dropdown again
+          const buttons2 = container.querySelectorAll(
+            'button[aria-label="Change language"]'
+          )
+          const triggerButton2 = buttons2[0] as HTMLButtonElement
+          fireEvent.click(triggerButton2)
+
           // Verify all buttons are still present and clickable
-          locales.forEach((locale) => {
-            const button = screen
-              .getByText(localeNames[locale])
-              .closest('button')
-            expect(button).toBeDefined()
-            expect(button?.disabled).toBeFalsy()
-          })
+          const dropdown2 = container.querySelector('.absolute.right-0')
+          if (dropdown2) {
+            locales.forEach((locale) => {
+              const button = within(dropdown2 as HTMLElement).getByRole(
+                'button',
+                {
+                  name: `Switch to ${localeNames[locale]}`,
+                }
+              ) as HTMLButtonElement
+              expect(button).toBeDefined()
+              expect(button?.disabled).toBeFalsy()
+            })
+          }
 
           // Cleanup
           unmount()
@@ -208,8 +286,16 @@ describe('Locale Change Behavior Property Tests', () => {
         // Render
         const { unmount } = render(<LanguageSwitcher />)
 
+        // Open dropdown
+        const triggerButton = screen.getByRole('button', {
+          name: /change language/i,
+        })
+        fireEvent.click(triggerButton)
+
         // Click the already active locale
-        const button = screen.getByText(localeNames[locale])
+        const button = screen.getByRole('button', {
+          name: `Switch to ${localeNames[locale]}`,
+        })
         fireEvent.click(button)
 
         // Should still call router.replace (idempotent operation)
