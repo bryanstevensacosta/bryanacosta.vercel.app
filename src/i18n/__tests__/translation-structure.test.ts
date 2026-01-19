@@ -48,6 +48,7 @@ describe('Translation File Structure', () => {
     'projects',
     'footer',
     'stats',
+    'services',
     'floatingCards',
     'skills',
     'metadata',
@@ -147,8 +148,8 @@ describe('Translation File Structure', () => {
     fc.assert(
       fc.property(fc.constantFrom(...esKeys), (key) => {
         const segments = key.split('.')
-        // Each segment should be a valid identifier (alphanumeric + underscore)
-        return segments.every((segment) => /^[a-zA-Z0-9_]+$/.test(segment))
+        // Each segment should be a valid identifier (alphanumeric + underscore + hyphen)
+        return segments.every((segment) => /^[a-zA-Z0-9_-]+$/.test(segment))
       }),
       { numRuns: 100 }
     )

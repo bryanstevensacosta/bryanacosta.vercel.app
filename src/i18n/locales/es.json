@@ -339,5 +339,36 @@
     "kotlin": "Kotlin",
     "firebase": "Firebase",
     "elasticsearch": "Elasticsearch"
+  },
+  "services": {
+    "label": "Capacidades",
+    "title": "ECOSISTEMA DE INGENIERÍA",
+    "subtitle": "Construimos infraestructura digital resiliente. Desde MVPs hasta migraciones de sistemas empresariales.",
+    "cards": {
+      "custom-software": {
+        "title": "Software Personalizado y MVPs",
+        "description": "Arquitectura escalable para startups de alto crecimiento. Te llevamos del concepto a una aplicación lista para producción con código limpio y mantenible."
+      },
+      "legacy-migration": {
+        "title": "Migración de Sistemas Legados",
+        "description": "Moderniza infraestructura antigua sin tiempo de inactividad. Refactorizamos monolitos en microservicios escalables."
+      },
+      "multi-platform": {
+        "title": "Multiplataforma",
+        "description": "Experiencias fluidas en Web, iOS y Android. Bases de código unificadas usando Flutter o React Native."
+      },
+      "ai-integration": {
+        "title": "Integración de IA",
+        "description": "Agentes LLM y flujos de automatización."
+      },
+      "ux-ui-design": {
+        "title": "Diseño UX/UI",
+        "description": "Interfaces funcionales de alta fidelidad."
+      },
+      "landing-pages": {
+        "title": "Páginas de Aterrizaje",
+        "description": "Arquitectura de alta conversión optimizada para velocidad y SEO."
+      }
+    }
   }
 }
