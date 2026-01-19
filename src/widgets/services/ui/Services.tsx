@@ -17,7 +17,7 @@ export function Services() {
           <div className="max-w-2xl">
             <h5
               className="font-bold tracking-widest text-xs uppercase mb-3 ml-1"
-              style={{ color: '#00c2b8' }}
+              style={{ color: '#00E68B' }}
             >
               {t('label')}
             </h5>

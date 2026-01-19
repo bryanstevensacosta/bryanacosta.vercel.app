@@ -7,9 +7,6 @@ export const services: Service[] = [
     size: 'large',
     colSpan: 2,
     rowSpan: 2,
-    badges: ['React', 'Node'],
-    backgroundImage:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAQwxmLoPdKhzrMrFvvMTyy2FQ5Uji3AmfDOriLQ__j8EAwkJg7Iv65V6y2Aw7jRlZFcItgw54orYu7xN4fjaVpQhBqrMnbtuWvRIkADRxUX4WYwhF5OSDVbhWpzwhYi8tYburD9pM_jQT21Ngtki1gm00XSudANt3cPP-ifV37-IJIc9Rgpu3UmEh8hLotPKYxZ9qyXmX46pcZwjz1QXxc-8JwLlQCCAblIisFPoSnoqADdxhVmifoXviEYu82oz6jPq0C2kCO7-lt',
   },
   {
     id: 'legacy-migration',
@@ -17,7 +14,13 @@ export const services: Service[] = [
     size: 'medium',
     colSpan: 1,
     rowSpan: 2,
-    features: ['Zero Downtime', 'Data Integrity'],
+    features: [
+      'Zero Downtime',
+      'Rollback Strategy',
+      'Cost Optimization',
+      'Performance Gains',
+      'Technical Debt Reduction',
+    ],
   },
   {
     id: 'multi-platform',
@@ -25,7 +28,7 @@ export const services: Service[] = [
     size: 'medium',
     colSpan: 1,
     rowSpan: 2,
-    platforms: ['iOS', 'Android', 'Web'],
+    platforms: ['iOS', 'Android', 'Web', 'Windows'],
   },
   {
     id: 'ai-integration',
@@ -34,6 +37,19 @@ export const services: Service[] = [
     colSpan: 1,
     rowSpan: 1,
     variant: 'ai',
+    platforms: [
+      'OpenAI',
+      'Claude',
+      'Gemini',
+      'Mistral',
+      'Ollama',
+      'Grok',
+      'DeepSeek',
+      'Qwen',
+      'MiniMax',
+      'HuggingFace',
+      'MCP',
+    ],
   },
   {
     id: 'ux-ui-design',
@@ -41,6 +57,7 @@ export const services: Service[] = [
     size: 'small',
     colSpan: 1,
     rowSpan: 1,
+    gifImage: '/gif/audio.gif',
   },
   {
     id: 'landing-pages',

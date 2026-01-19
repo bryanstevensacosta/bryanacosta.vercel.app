@@ -12,4 +12,5 @@ export interface Service {
   features?: string[]
   platforms?: string[]
   backgroundImage?: string
+  gifImage?: string
 }

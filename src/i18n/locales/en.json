@@ -347,23 +347,23 @@
     "cards": {
       "custom-software": {
         "title": "Custom Software & MVPs",
-        "description": "Scalable architecture for high-growth startups. We take you from concept to production-grade application with clean, maintainable code."
+        "description": "Production-ready software built to scale for digital products at any stage. Clean architecture, maintainable code, real-world results."
       },
       "legacy-migration": {
         "title": "Legacy Migration",
-        "description": "Modernize aging infrastructure without business downtime. We refactor monoliths into scalable microservices."
+        "description": "Modernize legacy systems with zero business disruption. Monolithic architectures are re-engineered into scalable and resilient microservices; improving performance, maintainability, and long-term scalability without downtime."
       },
       "multi-platform": {
         "title": "Multi-Platform",
-        "description": "Seamless experiences across Web, iOS, and Android. Unified codebases using Flutter or React Native."
+        "description": "Native experiences across iOS, iPadOS, watchOS, macOS, Android, Web, and Windows. Single codebase architecture that maximizes code reuse while maintaining platform-specific performance and UI/UX standards."
       },
       "ai-integration": {
         "title": "AI Integration",
-        "description": "LLM Agents & Automation workflows."
+        "description": "Custom LLM agents and automation workflows streamline operations, eliminate manual processes and enable faster execution."
       },
       "ux-ui-design": {
         "title": "UX/UI Design",
-        "description": "Functional, high-fidelity interfaces."
+        "description": "Functional, high-fidelity interfaces that balance usability, aesthetics, and performance."
       },
       "landing-pages": {
         "title": "Landing Pages",
