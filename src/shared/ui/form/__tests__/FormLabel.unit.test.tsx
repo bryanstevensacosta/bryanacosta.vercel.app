@@ -24,7 +24,7 @@ describe('FormLabel', () => {
       </FormLabel>
     )
 
-    const requiredIndicator = container.querySelector('.text-primary')
+    const requiredIndicator = container.querySelector('.text-\\[\\#4A2BFC\\]')
     expect(requiredIndicator).toBeDefined()
     expect(requiredIndicator?.textContent).toBe('*')
   })
@@ -36,7 +36,7 @@ describe('FormLabel', () => {
       </FormLabel>
     )
 
-    const requiredIndicator = container.querySelector('.text-primary')
+    const requiredIndicator = container.querySelector('.text-\\[\\#4A2BFC\\]')
     expect(requiredIndicator).toBeNull()
   })
 

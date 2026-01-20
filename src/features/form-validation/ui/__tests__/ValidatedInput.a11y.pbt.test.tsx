@@ -9,27 +9,47 @@ import { render, screen } from '@testing-library/react'
 import fc from 'fast-check'
 import { ValidatedInput } from '../ValidatedInput'
 import userEvent from '@testing-library/user-event'
+import { NextIntlClientProvider } from 'next-intl'
+
+// Custom generator for non-empty, non-whitespace strings
+const nonEmptyString = (minLength: number, maxLength: number) =>
+  fc
+    .string({ minLength, maxLength })
+    .filter((s) => s.trim().length > 0)
+    .map((s) => s.trim())
+
+const messages = {
+  validation: {
+    name: { required: 'Name is required' },
+    email: {
+      required: 'Email is required',
+      invalid: 'Please enter a valid email address',
+    },
+  },
+}
 
 describe('Property 9: ARIA labels for all form fields', () => {
   it('should have proper ARIA label for any field configuration', () => {
     fc.assert(
       fc.property(
         fc.record({
-          name: fc.string({ minLength: 1, maxLength: 20 }),
-          label: fc.string({ minLength: 1, maxLength: 50 }),
+          name: nonEmptyString(1, 20),
+          label: nonEmptyString(1, 50),
           required: fc.boolean(),
           type: fc.constantFrom('text', 'email'),
         }),
         (config) => {
           const { container } = render(
-            <ValidatedInput
-              name={config.name}
-              label={config.label}
-              type={config.type}
-              required={config.required}
-              value=""
-              onChange={vi.fn()}
-            />
+            <NextIntlClientProvider locale="en" messages={messages}>
+              <ValidatedInput
+                name={config.name}
+                label={config.label}
+                type={config.type}
+                required={config.required}
+                value=""
+                onChange={vi.fn()}
+              />
+            </NextIntlClientProvider>
           )
 
           const input = screen.getByRole('textbox')
@@ -56,26 +76,28 @@ describe('Property 10: Screen reader error announcements', () => {
     await fc.assert(
       fc.asyncProperty(
         fc.record({
-          name: fc.string({ minLength: 1, maxLength: 20 }),
-          label: fc.string({ minLength: 1, maxLength: 50 }),
-          errorMessage: fc.string({ minLength: 1, maxLength: 100 }),
+          name: nonEmptyString(1, 20),
+          label: nonEmptyString(1, 50),
+          errorMessage: nonEmptyString(1, 100),
         }),
         async (config) => {
           const user = userEvent.setup()
 
           const { container } = render(
-            <ValidatedInput
-              name={config.name}
-              label={config.label}
-              value=""
-              onChange={vi.fn()}
-              validationRules={[
-                {
-                  type: 'required',
-                  message: config.errorMessage,
-                },
-              ]}
-            />
+            <NextIntlClientProvider locale="en" messages={messages}>
+              <ValidatedInput
+                name={config.name}
+                label={config.label}
+                value=""
+                onChange={vi.fn()}
+                validationRules={[
+                  {
+                    type: 'required',
+                    message: config.errorMessage,
+                  },
+                ]}
+              />
+            </NextIntlClientProvider>
           )
 
           const input = screen.getByRole('textbox')
@@ -112,17 +134,19 @@ describe('Property 12: Focus indicators on interactive elements', () => {
     fc.assert(
       fc.property(
         fc.record({
-          name: fc.string({ minLength: 1, maxLength: 20 }),
-          label: fc.string({ minLength: 1, maxLength: 50 }),
+          name: nonEmptyString(1, 20),
+          label: nonEmptyString(1, 50),
         }),
         (config) => {
           const { container } = render(
-            <ValidatedInput
-              name={config.name}
-              label={config.label}
-              value=""
-              onChange={vi.fn()}
-            />
+            <NextIntlClientProvider locale="en" messages={messages}>
+              <ValidatedInput
+                name={config.name}
+                label={config.label}
+                value=""
+                onChange={vi.fn()}
+              />
+            </NextIntlClientProvider>
           )
 
           const input = screen.getByRole('textbox')
