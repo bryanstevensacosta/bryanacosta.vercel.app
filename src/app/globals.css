@@ -44,6 +44,10 @@
   --neon-green: oklch(0.8 0.22 160);
   --neon-blue: oklch(0.8 0.15 195);
   --surface: oklch(0.15 0.02 280);
+  
+  /* Workflow section colors */
+  --primary-workflow: #1e6d71;
+  --surface-dark: #22262d;
 }
 
 .dark {
@@ -86,6 +90,10 @@
   --neon-green: oklch(0.8 0.22 160);
   --neon-blue: oklch(0.8 0.15 195);
   --surface: oklch(0.12 0.02 280);
+  
+  /* Workflow section colors */
+  --primary-workflow: #1e6d71;
+  --surface-dark: #22262d;
 }
 
 @theme inline {
@@ -138,12 +146,15 @@
   --color-neon-green: var(--neon-green);
   --color-neon-blue: var(--neon-blue);
   --color-surface: var(--surface);
+  --color-primary-workflow: var(--primary-workflow);
+  --color-surface-dark: var(--surface-dark);
 
   /* Custom animations */
   --animate-scroll: scroll 30s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-delayed: float 6s ease-in-out 3s infinite;
   --animate-pulse-glow: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-flow: flow 10s linear infinite;
 }
 
 @layer base {
@@ -210,6 +221,15 @@
   50% {
     opacity: 0.8;
     filter: brightness(1.5);
+  }
+}
+
+@keyframes flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
   }
 }
 
