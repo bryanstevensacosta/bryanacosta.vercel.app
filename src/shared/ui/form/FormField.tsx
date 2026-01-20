@@ -24,7 +24,7 @@ export function FormField({
         className="ml-1 text-xs font-bold uppercase tracking-wider text-gray-400"
       >
         {label}
-        {required && <span className="ml-1 text-primary">*</span>}
+        {required && <span className="ml-1 text-[#4A2BFC]">*</span>}
       </label>
       {children}
       {error && (
