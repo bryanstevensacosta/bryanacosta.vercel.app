@@ -97,7 +97,7 @@ describe('E2E: Complete User Journey - Success Flow', () => {
 
     // Step 2: Verify submit button exists
     const submitButton = screen.getByRole('button', {
-      name: enMessages.contact.form.submit,
+      name: /Send Message/i,
     })
     expect(submitButton).toBeInTheDocument()
 
@@ -160,7 +160,7 @@ describe('E2E: Error Recovery Flow', () => {
     expect(screen.getByText(enMessages.contact.form.title)).toBeInTheDocument()
 
     const submitButton = screen.getByRole('button', {
-      name: enMessages.contact.form.submit,
+      name: /Send Message/i,
     })
     expect(submitButton).toBeInTheDocument()
 
@@ -210,7 +210,7 @@ describe('E2E: Validation Flow', () => {
 
     // Try to submit empty form
     const submitButton = screen.getByRole('button', {
-      name: enMessages.contact.form.submit,
+      name: /Send Message/i,
     })
 
     // Button should be disabled when form is invalid

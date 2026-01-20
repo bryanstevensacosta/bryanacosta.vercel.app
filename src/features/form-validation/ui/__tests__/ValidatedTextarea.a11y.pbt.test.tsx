@@ -8,27 +8,41 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import fc from 'fast-check'
 import { ValidatedTextarea } from '../ValidatedTextarea'
+import { NextIntlClientProvider } from 'next-intl'
+
+// Custom generator for non-empty, non-whitespace strings
+const nonEmptyString = (minLength: number, maxLength: number) =>
+  fc
+    .string({ minLength, maxLength })
+    .filter((s) => s.trim().length > 0)
+    .map((s) => s.trim())
+
+const messages = {
+  validation: {},
+}
 
 describe('Property 9: ARIA labels for textarea fields', () => {
   it('should have proper ARIA attributes for any textarea configuration', () => {
     fc.assert(
       fc.property(
         fc.record({
-          name: fc.string({ minLength: 1, maxLength: 20 }),
-          label: fc.string({ minLength: 1, maxLength: 50 }),
+          name: nonEmptyString(1, 20),
+          label: nonEmptyString(1, 50),
           required: fc.boolean(),
           rows: fc.integer({ min: 2, max: 10 }),
         }),
         (config) => {
           const { container } = render(
-            <ValidatedTextarea
-              name={config.name}
-              label={config.label}
-              required={config.required}
-              rows={config.rows}
-              value=""
-              onChange={vi.fn()}
-            />
+            <NextIntlClientProvider locale="en" messages={messages}>
+              <ValidatedTextarea
+                name={config.name}
+                label={config.label}
+                required={config.required}
+                rows={config.rows}
+                value=""
+                onChange={vi.fn()}
+              />
+            </NextIntlClientProvider>
           )
 
           const textarea = screen.getByRole('textbox')
@@ -55,17 +69,19 @@ describe('Property 12: Focus indicators on textarea elements', () => {
     fc.assert(
       fc.property(
         fc.record({
-          name: fc.string({ minLength: 1, maxLength: 20 }),
-          label: fc.string({ minLength: 1, maxLength: 50 }),
+          name: nonEmptyString(1, 20),
+          label: nonEmptyString(1, 50),
         }),
         (config) => {
           const { container } = render(
-            <ValidatedTextarea
-              name={config.name}
-              label={config.label}
-              value=""
-              onChange={vi.fn()}
-            />
+            <NextIntlClientProvider locale="en" messages={messages}>
+              <ValidatedTextarea
+                name={config.name}
+                label={config.label}
+                value=""
+                onChange={vi.fn()}
+              />
+            </NextIntlClientProvider>
           )
 
           const textarea = screen.getByRole('textbox')

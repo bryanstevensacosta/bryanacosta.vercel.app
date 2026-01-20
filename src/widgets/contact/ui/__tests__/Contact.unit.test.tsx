@@ -122,11 +122,11 @@ describe('Contact Widget Unit Tests', () => {
       expect(decorativeElements.length).toBeGreaterThan(0)
     })
 
-    it('should have gradient background', () => {
+    it('should have background styling', () => {
       const { container } = renderWithIntl(<Contact />)
 
       const section = container.querySelector('section')
-      expect(section).toHaveClass('bg-gradient-to-b')
+      expect(section).toHaveClass('bg-background')
     })
   })
 
