@@ -70,7 +70,7 @@ export function WorkflowCTA() {
         </p>
         <Button
           onClick={handleStartDiscovery}
-          className="relative z-10 group bg-[#4C02FB] hover:bg-[#3D02C9] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-[#4C02FB]/25 flex items-center gap-2 mx-auto backdrop-blur-sm"
+          className="relative z-10 group bg-[#4C02FB] hover:bg-[#3D02C9] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-[#4C02FB]/25 flex items-center gap-2 mx-auto backdrop-blur-sm cursor-pointer"
           style={{
             boxShadow: '0 4px 20px rgba(76,2,251,0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
           }}
