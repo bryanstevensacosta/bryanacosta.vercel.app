@@ -13,8 +13,18 @@ export function WorkflowProcess() {
       className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden"
       aria-labelledby="workflow-heading"
     >
-      {/* Abstract gradient shapes - Metallic white blurs */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+      {/* Background grid pattern - Higher z-index */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.05] z-[1]"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Abstract gradient shapes - Metallic white blurs - Lower z-index */}
+      <div className="absolute inset-0 pointer-events-none z-[0]" aria-hidden="true">
         {/* Top left metallic blur */}
         <div 
           className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20"
@@ -62,16 +72,6 @@ export function WorkflowProcess() {
           }}
         />
       </div>
-
-      {/* Background grid pattern */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.02]"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-        aria-hidden="true"
-      />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
