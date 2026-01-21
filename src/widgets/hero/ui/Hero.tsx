@@ -42,7 +42,7 @@ export function Hero() {
   }
 
   return (
-    <main className="relative min-h-screen pt-24 sm:pt-28 md:pt-32 pb-12 md:pb-20 flex flex-col items-center overflow-x-hidden bg-transparent px-4 sm:px-6">
+    <main className="relative min-h-screen pt-24 sm:pt-28 md:pt-32 pb-12 md:pb-20 flex flex-col items-center overflow-x-hidden bg-transparent px-6">
       {/* Blur backgrounds */}
       <div
         className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[90vw] max-w-[800px] h-[60vh] max-h-[600px] rounded-full blur-[120px] md:blur-[160px] opacity-50 pointer-events-none"

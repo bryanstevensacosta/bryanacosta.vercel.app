@@ -101,7 +101,7 @@ export function FeaturedProjects() {
 
   return (
     <>
-      <section id="projects" className="py-16 px-4 sm:px-6 relative">
+      <section id="projects" className="py-16 px-6 relative">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-purple/10 rounded-full blur-[100px] -z-10" />
 

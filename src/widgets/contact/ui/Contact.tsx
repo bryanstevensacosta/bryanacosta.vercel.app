@@ -13,7 +13,7 @@ export function Contact({ className }: ContactProps) {
     <section
       id="contact"
       className={cn(
-        'relative overflow-hidden py-16 px-4 sm:px-6',
+        'relative overflow-hidden py-16 px-6',
         'bg-background',
         className
       )}

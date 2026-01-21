@@ -10,7 +10,7 @@ export function WorkflowProcess() {
   return (
     <section 
       id="workflow" 
-      className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden"
+      className="relative py-16 md:py-24 px-6 overflow-hidden"
       aria-labelledby="workflow-heading"
     >
       {/* Blur backgrounds - Black versions of Hero style */}

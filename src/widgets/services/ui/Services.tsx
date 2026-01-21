@@ -7,7 +7,7 @@ export function Services() {
   const services = useServices()
 
   return (
-    <section id="services" className="relative py-16 px-4 sm:px-6">
+    <section id="services" className="relative py-16 px-6">
       {/* Background grid pattern */}
       <div className="absolute inset-0 pointer-events-none bg-grid-pattern h-[600px]" />
 
